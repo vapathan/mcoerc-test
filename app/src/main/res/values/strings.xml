@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">MCOERC Test</string>
+    <string name="app_title">MCOERC Test</string>
+    <string name="login_now">Login Now</string>
+    <string name="please_login">Enter your registered mobile number to proceed for login</string>
+    <string name="login">Log in</string>
+    <string name="remember_me">Remember me</string>
+    <string name="new_login">New Login | Register</string>
+    <string name="register_here">Register Here</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="register">Register</string>
+    <string name="new_register">Already Register | LogIn</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="view_solution">View Solution</string>
+    <string name="mcoerc">Matoshri College of Engineering and Research Center Eklahare, Nashik</string>
+    <string name="correct_option">Correct Option:</string>
+    <string name="name">Name</string>
+    <string name="first_name">First Name</string>
+    <string name="middle_name">Middle Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="mobile">Mobile</string>
+    <string name="parent_mobile">Parent Mobile</string>
+    <string name="email">Email</string>
+    <string name="college">College</string>
+    <string name="address">Address</string>
+
+    <string name="verification_code">Verification Code</string>
+    <string name="mobile_verification_code">Mobile Verification Code</string>
+    <string name="submit">Submit</string>
+    <string name="resend_otp">Resend</string>
+    <string name="verify">Verify </string>
+    <string name="enter_otp">Please type the verification code sent to your registered mobile number</string>
+
+
+    <string name="menu_question_bank">Question Bank</string>
+    <string name="menu_tests">Tests</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="nav_header_desc">Description</string>
+    <string name="nav_header_title">Title</string>
+    <string name="nav_header_subtitle">SubTitle</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="download_questions">Download Questions</string>
+    <string name="tests">Tests</string>
+    <string name="save_and_next">Save and Next</string>
+    <string name="resume">Resume</string>
+    <string name="pause">Pause</string>
+    <string name="score_card">Score Card</string>
+    <string name="total_question">Total Questions</string>
+    <string name="todo">TODO</string>
+    <string name="questions_attempted">Attempted</string>
+    <string name="correct">Correct</string>
+    <string name="wrong">Wrong</string>
+
+</resources>

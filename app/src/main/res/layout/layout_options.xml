@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_S">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_S"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/llayout_A"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_S"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_option_A_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_S"
+                android:padding="@dimen/margin_S"
+                android:text="A."
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_large" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_S"
+                android:orientation="vertical">
+
+                <io.github.sidvenu.mathjaxview.MathJaxView
+                    android:id="@+id/tv_option_A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_S"
+                    android:padding="@dimen/padding_S"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_large" />
+
+                <ImageView
+                    android:id="@+id/iv_option_A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llayout_B"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_S"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_option_B_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_S"
+                android:padding="@dimen/margin_S"
+                android:text="B."
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_large" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_S"
+                android:orientation="vertical">
+
+                <io.github.sidvenu.mathjaxview.MathJaxView
+                    android:id="@+id/tv_option_B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_S"
+                    android:padding="@dimen/padding_S"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_large" />
+
+                <ImageView
+                    android:id="@+id/iv_option_B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llayout_C"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_S"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_option_C_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_S"
+                android:padding="@dimen/margin_S"
+                android:text="C."
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_large" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_S"
+                android:orientation="vertical">
+
+                <io.github.sidvenu.mathjaxview.MathJaxView
+                    android:id="@+id/tv_option_C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_S"
+                    android:padding="@dimen/padding_S"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_large" />
+
+                <ImageView
+                    android:id="@+id/iv_option_C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llayout_D"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_S"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_option_D_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_S"
+                android:padding="@dimen/margin_S"
+                android:text="D."
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_large" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_S"
+                android:orientation="vertical">
+
+                <io.github.sidvenu.mathjaxview.MathJaxView
+                    android:id="@+id/tv_option_D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_S"
+                    android:padding="@dimen/padding_S"
+                    android:text="$\\sum_{i=0}^n i^2 = \\frac{(n^2+n)(2n+1)}{6}$"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_large" />
+
+                <ImageView
+                    android:id="@+id/iv_option_D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

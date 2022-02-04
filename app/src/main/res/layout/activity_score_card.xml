@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ScoreCardActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_S">
+
+        <TextView
+            android:id="@+id/tv_score_card"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_S"
+            android:gravity="center_horizontal"
+            android:text="@string/score_card"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            android:textStyle="normal" />
+
+        <ImageButton
+            android:id="@+id/ib_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/margin_S"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/ic_close"
+            android:contentDescription="@string/todo"
+            android:soundEffectsEnabled="true" />
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_below="@id/tv_score_card"
+            android:src="@drawable/line" />
+
+        <RelativeLayout
+            android:id="@+id/rLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:padding="1dp">
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="80dp"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/margin_L"
+                android:padding="@dimen/padding_S"
+                android:scaleType="fitXY"
+                android:src="@mipmap/mcoerc_logo"
+                tools:ignore="VectorDrawableCompat" />
+
+            <TextView
+                android:id="@+id/tv_app"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_logo"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="@dimen/margin_M"
+                android:ellipsize="end"
+                android:gravity="center_horizontal"
+                android:maxLines="2"
+                android:text="@string/app_title"
+                android:textAlignment="center"
+                android:textColor="@color/color_primary"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_below="@+id/rLayout"
+            android:layout_marginBottom="@dimen/margin_M"
+            android:background="@color/material_on_surface_disabled" />
+
+        <RelativeLayout
+            android:id="@+id/rLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/v1"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="@dimen/margin_S"
+            android:padding="1dp">
+
+            <ImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_S"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_winner" />
+
+            <TextView
+                android:id="@+id/tv_student_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/iv_profile"
+                android:ellipsize="end"
+                android:gravity="center_horizontal"
+                android:maxLines="2"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="normal" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rLayout1"
+            android:layout_margin="@dimen/margin_S"
+            android:fontFamily="@font/noto_sans"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textColor="@color/color_secondary"
+            android:textSize="@dimen/text_large"
+            android:textStyle="normal" />
+
+        <ImageView
+            android:id="@+id/iv_line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_test"
+            android:layout_marginTop="@dimen/margin_M"
+            android:layout_marginBottom="@dimen/margin_S"
+            android:contentDescription="TODO"
+            android:src="@drawable/line" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_line1"
+            android:layout_margin="@dimen/margin_S">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:stretchColumns="1,2,3,4"
+                android:layout_gravity="center_horizontal"
+                >
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:text="                            "
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:text="Phy"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="3"
+                        android:text="Chem"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="4"
+                        android:text="Math"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:text="Questions"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/tv_phy_questions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/tv_chem_questions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="3"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/tv_math_questions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="4"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:text="Wrong"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/tv_phy_attempted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/tv_chem_attempted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="3"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/tv_math_attempted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="4"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:text="Attempted"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/tv_phy_wrong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/tv_chem_wrong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="3"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/tv_math_wrong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="4"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+                </TableRow>
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:text="Correct"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal" />
+
+                    <TextView
+                        android:id="@+id/tv_phy_correct"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/tv_chem_correct"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="3"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:id="@+id/tv_math_correct"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="4"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal"/>
+                </TableRow>
+            </TableLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

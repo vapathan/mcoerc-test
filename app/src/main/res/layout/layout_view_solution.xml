@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sv_answer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_S"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_S"
+        app:cardCornerRadius="@dimen/margin_S">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_S"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_view_solution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_S"
+                android:text="@string/view_solution"
+                android:textColor="@color/design_default_color_secondary_variant"
+                android:textSize="@dimen/text_large" />
+
+            <TextView
+                android:id="@+id/tv_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_S"
+                android:lineSpacingExtra="1dp"
+                android:padding="1dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_large" />
+
+            <ImageView
+                android:id="@+id/iv_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_S"
+                android:padding="@dimen/padding_S"
+                android:scaleType="fitCenter" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</ScrollView>

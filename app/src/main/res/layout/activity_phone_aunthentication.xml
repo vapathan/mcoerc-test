@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".PhoneAuthenticationActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/smart_phone" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_L"
+        android:text="@string/verification_code"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_medium"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_otp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_large"
+        android:gravity="center_horizontal" />
+
+    <EditText
+        android:id="@+id/et_otp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="@dimen/margin_M"
+        android:layout_marginRight="50dp"
+        android:backgroundTint="@color/color_devider"
+        android:hint="@string/verification_code"
+        android:inputType="number"
+        android:maxLength="10"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_large"
+        android:theme="@style/EditText.Filled"
+        android:gravity="center_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_M"
+        android:layout_marginEnd="@dimen/margin_M"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_verify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/btn_resend_otp"
+            android:background="@color/color_secondary"
+            android:layout_margin="10dp"
+            android:text="@string/verify"
+            android:textAllCaps="true"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_medium"
+            android:enabled="false"/>
+
+
+        <Button
+            android:id="@+id/btn_resend_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@color/color_primary"
+            android:text="@string/resend_otp"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_medium" />
+    </RelativeLayout>
+</LinearLayout>

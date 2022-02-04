@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "36793472703",
+    "project_id": "mcoerc-c30cb",
+    "storage_bucket": "mcoerc-c30cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36793472703:android:fba89a8bbd59224d09980a",
+        "android_client_info": {
+          "package_name": "com.ass.mcoerctest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36793472703-ekeaf87evfabcqt411qc83jcuvk2c256.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaG9Eg5Wshh7ZlfUQjqyRx5Y2regLXLQs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36793472703-ekeaf87evfabcqt411qc83jcuvk2c256.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

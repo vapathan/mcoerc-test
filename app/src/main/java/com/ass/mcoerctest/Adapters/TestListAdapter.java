@@ -7,8 +7,6 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,10 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ass.mcoerctest.R;
 import com.ass.mcoerctest.TestActivity;
-import com.ass.mcoerctest.database.AppDatabase;
 import com.ass.mcoerctest.models.Test;
-import com.ass.mcoerctest.repositories.QuestionRepository;
-import com.ass.mcoerctest.repositories.ScoreCardRepository;
 
 import java.util.List;
 
@@ -29,15 +24,10 @@ import static com.ass.mcoerctest.constants.Constants.TEST_KEY;
 public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.ViewHolder> {
     private Context context;
     private List<Test> mTestList;
-    private QuestionRepository mQuestionRepository;
-    private ScoreCardRepository mScoreCardRepository;
-    private AppDatabase mDb;
 
     public TestListAdapter(Context context, List<Test> testList) {
         this.context = context;
         this.mTestList = testList;
-        mQuestionRepository = QuestionRepository.getInstance(context);
-        mScoreCardRepository = ScoreCardRepository.getInstance(context);
     }
 
     public void setTests(List<Test> testList) {
@@ -56,8 +46,9 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Test test = mTestList.get(position);
 
-        holder.tvTestTitle.setText(test.getTitle());
-
+        holder.tvTestTitle.setText(test.getCourseName() + " - " + test.getCourseCode());
+        holder.tvDateTime.setText(test.getDate());
+        holder.tvDuration.setText(test.getTimeDuration());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,17 +86,13 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTestTitle, tvTestScore;
-        ImageView ivIsAttempted;
-        ProgressBar progressBar;
+        TextView tvTestTitle, tvDuration, tvDateTime;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             tvTestTitle = (TextView) itemView.findViewById(R.id.tv_test_title);
-            tvTestScore = (TextView) itemView.findViewById(R.id.tv_test_score);
-            ivIsAttempted = (ImageView) itemView.findViewById(R.id.iv_isattempted);
-            progressBar = (ProgressBar) itemView.findViewById(R.id.progressbar);
+            tvDateTime = (TextView) itemView.findViewById(R.id.tv_date_time);
+            tvDuration = (TextView) itemView.findViewById(R.id.tv_duration);
         }
     }
 

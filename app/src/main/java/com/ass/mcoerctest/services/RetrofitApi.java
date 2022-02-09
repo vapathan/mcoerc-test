@@ -7,7 +7,6 @@ import com.ass.mcoerctest.models.Question;
 import com.ass.mcoerctest.models.Student;
 import com.ass.mcoerctest.models.Subject;
 import com.ass.mcoerctest.models.Test;
-import com.ass.mcoerctest.models.TestQuestion;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -27,8 +26,8 @@ public interface RetrofitApi {
     @GET("chapter")
     Call<Chapter[]> getChapters(@Query("apiKey") String apiKey, @Query("subjectCode") int subjectCode);
 
-    @GET("question")
-    Call<Question[]> getQuestions(@Query("apiKey") String apiKey, @Query("subjectCode") int subjectCode, @Query("chapterId") int chapterId);
+    @GET("get-test-paper-questions")
+    Call<Question[]> getQuestions(@Query("apiKey") String apiKey, @Query("testId") int testId);
 
     @FormUrlEncoded
     @POST("student/register")
@@ -41,7 +40,7 @@ public interface RetrofitApi {
     Call<Test[]> getTests(@Query("apiKey") String apiKey, @Query("prn") String prn);
 
     @GET("getTestQuestions")
-    Call<TestQuestion[]> getTestQuestions(@Query("apiKey") String apiKey, @Query("testId") int testId);
+    Call<Question[]> getTestQuestions(@Query("apiKey") String apiKey, @Query("testId") int testId);
 
     @GET("notification")
     Call<Notification[]> getNotifications(@Query("apiKey") String apiKey);
@@ -49,5 +48,9 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST("test/saveScoreCard")
     Call<ApiResponse> saveScoreCard(@Field("apiKey") String apiKey, @Field("scoreCard") String scoreCardString);
+
+    @FormUrlEncoded
+    @POST("test/save-responses")
+    Call<ApiResponse> saveResponses(@Field("apiKey") String apiKey, @Field("responses") String responses);
 
 }

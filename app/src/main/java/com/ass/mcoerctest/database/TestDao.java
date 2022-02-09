@@ -22,8 +22,6 @@ public interface TestDao {
     List<Test> getTests();
 
 
-    @Query("SELECT * FROM question WHERE id IN (SELECT questionId from testquestion WHERE testId = :testId ORDER BY questionId)")
-    List<Question> getQuestions(int testId);
 
 
 

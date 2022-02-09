@@ -2,7 +2,6 @@ package com.ass.mcoerctest.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.ass.mcoerctest.ChaptersActivity;
-
 import com.ass.mcoerctest.R;
-import com.ass.mcoerctest.models.Subject;
 import com.ass.mcoerctest.models.Test;
-import com.ass.mcoerctest.utilities.ImageHelper;
 
 import java.util.List;
 
@@ -56,9 +51,7 @@ public class DashboardListAdapter extends RecyclerView.Adapter<DashboardListAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ChaptersActivity.class);
-                intent.putExtra(SUBJECT_KEY, test);
-                view.getContext().startActivity(intent);
+
             }
         });
     }

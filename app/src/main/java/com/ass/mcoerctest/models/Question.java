@@ -11,43 +11,52 @@ import androidx.room.PrimaryKey;
 public class Question implements Parcelable {
     @PrimaryKey
     private int id;
+    private int testId;
     private String title;
     private String optA;
     private String optB;
     private String optC;
     private String optD;
     private String correctOption;
+    private String selectedOption;
+    private boolean isAttempted;
     private String explanation;
-    private int subjectCode;
-    private int chapterId;
+    private int courseCode;
+    private int unitId;
     private boolean isVisited;
 
     protected Question(Parcel in) {
         id = in.readInt();
+        testId = in.readInt();
         title = in.readString();
         optA = in.readString();
         optB = in.readString();
         optC = in.readString();
         optD = in.readString();
         correctOption = in.readString();
+        selectedOption = in.readString();
+        isAttempted = in.readByte()!=0;
         explanation = in.readString();
-        subjectCode = in.readInt();
-        chapterId = in.readInt();
+        courseCode = in.readInt();
+        unitId = in.readInt();
         isVisited = in.readByte() != 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
+        dest.writeInt(testId);
         dest.writeString(title);
         dest.writeString(optA);
         dest.writeString(optB);
         dest.writeString(optC);
         dest.writeString(optD);
         dest.writeString(correctOption);
+        dest.writeString(selectedOption);
+        dest.writeByte((byte) (isAttempted ? 1 : 0));
         dest.writeString(explanation);
-        dest.writeInt(subjectCode);
-        dest.writeInt(chapterId);
+        dest.writeInt(courseCode);
+        dest.writeInt(unitId);
         dest.writeByte((byte) (isVisited ? 1 : 0));
     }
 
@@ -89,8 +98,8 @@ public class Question implements Parcelable {
         this.optD = optD;
         this.correctOption = correctOption;
         this.explanation = explanation;
-        this.subjectCode = subjectCode;
-        this.chapterId = chapterId;
+        this.courseCode = subjectCode;
+        this.unitId = chapterId;
     }
 
 
@@ -100,6 +109,14 @@ public class Question implements Parcelable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getTestId() {
+        return testId;
+    }
+
+    public void setTestId(int testId) {
+        this.testId = testId;
     }
 
     public String getTitle(boolean isFormatted) {
@@ -177,20 +194,20 @@ public class Question implements Parcelable {
         this.explanation = explanation;
     }
 
-    public int getSubjectCode() {
-        return subjectCode;
+    public int getCourseCode() {
+        return courseCode;
     }
 
-    public void setSubjectCode(int subjectCode) {
-        this.subjectCode = subjectCode;
+    public void setCourseCode(int courseCode) {
+        this.courseCode = courseCode;
     }
 
-    public int getChapterId() {
-        return chapterId;
+    public int getUnitId() {
+        return unitId;
     }
 
-    public void setChapterId(int chapterId) {
-        this.chapterId = chapterId;
+    public void setUnitId(int unitId) {
+        this.unitId = unitId;
     }
 
     public String getTitle() {
@@ -217,7 +234,21 @@ public class Question implements Parcelable {
         return explanation;
     }
 
+    public String getSelectedOption() {
+        return selectedOption;
+    }
 
+    public void setSelectedOption(String selectedOption) {
+        this.selectedOption = selectedOption;
+    }
+
+    public boolean isAttempted() {
+        return isAttempted;
+    }
+
+    public void setAttempted(boolean attempted) {
+        isAttempted = attempted;
+    }
 
     private String generateHtml(String text) {
         String html = "<html><body  style=\"text-align:left;\">" + text + "</body></html>";

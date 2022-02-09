@@ -21,9 +21,7 @@ import com.ass.mcoerctest.models.Question;
 import com.ass.mcoerctest.models.ScoreCard;
 import com.ass.mcoerctest.models.Student;
 import com.ass.mcoerctest.models.Test;
-import com.ass.mcoerctest.models.TestQuestion;
 import com.ass.mcoerctest.repositories.QuestionRepository;
-import com.ass.mcoerctest.repositories.ScoreCardRepository;
 import com.ass.mcoerctest.repositories.StudentRepository;
 import com.ass.mcoerctest.repositories.TestRepository;
 import com.ass.mcoerctest.services.ApiResponse;
@@ -35,6 +33,8 @@ import com.ass.mcoerctest.utilities.ui.UIHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -56,7 +56,7 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
     private Test mTest;
     private long startTime;
     private TestRepository mTestRepository;
-    private List<TestQuestion> mTestQuestionList;
+    private List<Question> mTestQuestionList;
     private QuestionRepository mQuestionRepository;
     private CountDownTimer mCountDownTimer;
     private static int mQuestionNumber;
@@ -64,7 +64,6 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
     private static boolean isTestPaused;
     private ScoreCard scoreCard;
     private RetrofitApi mRetrofitApi;
-    private ScoreCardRepository mScoreCardRepository;
     private Student student;
 
     @Override
@@ -76,10 +75,8 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
         RetrofitApiClient retrofitApiClient = RetrofitApiClient.getInstance();
 
         mRetrofitApi = retrofitApiClient.getRetrofitApi();
-
         mQuestionRepository = QuestionRepository.getInstance(this);
         mTestRepository = TestRepository.getInstance(this);
-        mScoreCardRepository = ScoreCardRepository.getInstance(this);
 
         Intent intent = getIntent();
 
@@ -91,7 +88,7 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
 
             mTest = intent.getParcelableExtra(TEST_KEY);
 
-            if (mTest != null && mTest != null) {
+            if (mTest != null ) {
                 getSupportActionBar().setTitle(mTest.getTitle());
                 getSupportActionBar().hide();
                 //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -129,7 +126,8 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
                 case R.id.previous:
                     goToPreviousQuestion();
                     break;
-                case R.id.pause_play:
+                /*case R.id.pause_play:
+                    item.setVisible(false);
                     if (isTestPaused) {
                         resumeTimer();
                         item.setIcon(R.drawable.ic_pause);
@@ -139,7 +137,7 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
                         item.setIcon(R.drawable.ic_resume);
                         item.setTitle(R.string.resume);
                     }
-                    break;
+                    break;*/
             }
 
             return true;
@@ -173,7 +171,7 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
     public void onBackPressed() {
         androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(TestActivity.this);
         builder.setTitle("Confirm");
-        builder.setMessage("Do you want to stop this test?");
+        builder.setMessage("Do you want to stop  and submit this test?");
         builder.setCancelable(false);
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
@@ -195,41 +193,32 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
     }
 
     private void loadQuestions() {
-
         AppExecutor.getInstance().dbExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 UIHelper.showProgressBar(mProgressBar);
-                mTestQuestionList = mTestRepository.getTestQuestions(mTest.getId());
+                mTestQuestionList = mQuestionRepository.getQuestions(mTest.getId());
                 if (mTestQuestionList != null && mTestQuestionList.size() > 0) {
-                    for (TestQuestion testQuestion : mTestQuestionList) {
-                        Question question = mQuestionRepository.getQuestion(testQuestion.getQuestionId());
-                        if (question != null) {
-                            testQuestion.setQuestion(question);
-                        } else {
-                            runOnUiThread(() -> {
-                                Toast.makeText(getApplicationContext(), testQuestion.getId() + "To start this test please download questions from all chapters of this subject", Toast.LENGTH_LONG).show();
-                                finish();
-                            });
-
-
-                        }
-                    }
                     mTestQuestionViewPagerAdapter = new TestQuestionViewPagerAdapter(getSupportFragmentManager(), mTestQuestionList);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             mQuestionViewPager.setAdapter(mTestQuestionViewPagerAdapter);
-                            /*if (mTest.getCurrentStatus() == 1) {
-                                mQuestionNumber = mTest.getCurrentQuestionNumber();
-                                mQuestionViewPager.setCurrentItem(mQuestionNumber);
-                            }*/
+                            mQuestionViewPager.setCurrentItem(0);
+                            //create timer for test
+                            createTimer();
+                            //start timer
+                            startTimer();
                         }
                     });
                 } else {
-                    runOnUiThread(() -> {
-                        Toast.makeText(getApplicationContext(), "To start this test please download questions from all chapters of this subject", Toast.LENGTH_LONG).show();
-                        finish();
+                   // getQuestionList(mTest.getId(), mProgressBar);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "Error occurred while starting the test. Please try again.", Toast.LENGTH_LONG).show();
+                            finish();
+                        }
                     });
 
                 }
@@ -238,19 +227,43 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
         });
     }
 
+    private void getQuestionList(int testId, ProgressBar progressBar) {
+        //Get Questions data from remote server
+        final List<Question>[] questionList = new List[]{new ArrayList<>()};
+
+        //Animations.blink(mContext, imageView);
+        if (progressBar != null) {
+            UIHelper.showProgressBar(progressBar);
+        }
+        Call<Question[]> call = mRetrofitApi.getQuestions(Api.API_KEY, testId);
+        call.enqueue(new Callback<Question[]>() {
+            @Override
+            public void onResponse(Call<Question[]> call, Response<Question[]> response) {
+                questionList[0] = Arrays.asList(response.body());
+                Log.i("INFO", "TTT : " + questionList[0].toString());
+                mQuestionRepository.saveQuestions(testId, questionList[0]);
+                mTestQuestionList = questionList[0];
+                if (progressBar != null) {
+                    UIHelper.hideProgressBar(progressBar);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Question[]> call, Throwable t) {
+                questionList[0] = null;
+                Log.i("INFO", t.getMessage());
+                if (progressBar != null) {
+                    UIHelper.hideProgressBar(progressBar);
+                }
+            }
+        });
+        // imageView.clearAnimation();
+    }
+
 
     private void loadAndStartTest() {
         loadQuestions();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //create timer for test
-                createTimer();
 
-                //start timer
-                startTimer();
-            }
-        });
     }
 
     private void goToNextQuestion() {
@@ -274,7 +287,7 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
             seconds = DateTimeHelper.getSeconds(mTest.getTimeDuration());
         } else {
             //if test is in paused state and going to be resume
-           // seconds = DateTimeHelper.getSeconds(mTest.getTimeDuration()) - mTest.getTimeSpent() / 1000;
+            // seconds = DateTimeHelper.getSeconds(mTest.getTimeDuration()) - mTest.getTimeSpent() / 1000;
         }
 
         startTime = seconds * 1000;
@@ -356,8 +369,8 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
         scoreCard = new ScoreCard();
         if (student != null) {
             scoreCard.setStudentName(student.getName());
-           // scoreCard.setStudentId(student.getPrn());
-            scoreCard.prepareScoreCard(mTest, mTestQuestionList);
+            // scoreCard.setStudentId(student.getPrn());
+            // scoreCard.prepareScoreCard(mTest, mTestQuestionList);
            /* mTest.setScore("P: " + scoreCard.getPhyCorrect() + "/" + scoreCard.getPhyQuestions() +
                     " C: " + scoreCard.getChemCorrect() + "/" + scoreCard.getChemQuestions() +
                     " M: " + scoreCard.getMathCorrect() + "/" + scoreCard.getMathQuestions());*/
@@ -370,6 +383,8 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
     public void updateQuestionResponse(int questionNumber, Question question, String selectedOption) {
         mQuestionNumber = questionNumber;
         if (selectedOption != null) {
+
+            //mark question as attempted;
             mTestRepository.markTestQuestionAsAttempted(mTest.getId(), question.getId(), selectedOption);
         }
     }
@@ -393,7 +408,6 @@ public class TestActivity extends AppCompatActivity implements TestQuestionFragm
                 if (response.isSuccessful()) {
                     ApiResponse apiResponse = response.body();
                     if (apiResponse.getStatus() == 201) {
-                        mScoreCardRepository.saveScoreCard(scoreCard);
                         pauseTest(2);
                         Intent intent = new Intent(getApplicationContext(), ScoreCardActivity.class);
                         intent.putExtra(SCORE_CARD_KEY, scoreCard);

@@ -16,12 +16,11 @@ import com.ass.mcoerctest.models.ScoreCard;
 import com.ass.mcoerctest.models.Student;
 import com.ass.mcoerctest.models.Subject;
 import com.ass.mcoerctest.models.Test;
-import com.ass.mcoerctest.models.TestQuestion;
 
 
 @Database(
-        entities = {Subject.class, Chapter.class, Question.class, Student.class,
-                Test.class, TestQuestion.class, ScoreCard.class},
+        entities = {Question.class, Student.class,
+                Test.class},
         version = 4
 )
 @TypeConverters(DateConverter.class)
@@ -39,9 +38,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public static volatile AppDatabase instance;
     private static final Object LOCK = new Object();
 
-    public abstract SubjectDao subjectDao();
-
-    public abstract ChapterDao chapterDao();
 
     public abstract QuestionDao questionDao();
 
@@ -49,9 +45,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TestDao testDao();
 
-    public abstract TestQuestionDao testQuestionDao();
 
-    public abstract ScoreCardDao scoreCardDao();
 
     public static AppDatabase getInstance(Context context) {
         if (instance == null) {

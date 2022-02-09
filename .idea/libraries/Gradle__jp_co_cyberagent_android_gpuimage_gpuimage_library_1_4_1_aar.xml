@@ -1,9 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9669137eb7aaf54f5767e7fe16093b82/transformed/jetified-gpuimage-library-1.4.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9669137eb7aaf54f5767e7fe16093b82/transformed/jetified-gpuimage-library-1.4.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9669137eb7aaf54f5767e7fe16093b82/transformed/jetified-gpuimage-library-1.4.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/36e15df40d7def231108a7deeca41046/transformed/jetified-gpuimage-library-1.4.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/36e15df40d7def231108a7deeca41046/transformed/jetified-gpuimage-library-1.4.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/36e15df40d7def231108a7deeca41046/transformed/jetified-gpuimage-library-1.4.1/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jp.co.cyberagent.android.gpuimage/gpuimage-library/1.4.1/9510964232ff55daf24895b3754842d6d26981eb/gpuimage-library-1.4.1-javadoc.jar!/" />

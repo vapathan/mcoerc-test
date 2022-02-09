@@ -69,10 +69,12 @@ public class QuestionRepository {
         });
     }
 
-    public void saveQuestions(final List<Question> questionList) {
+    public void saveQuestions(int testId, final List<Question> questionList) {
+
         AppExecutor.getInstance().dbExecutor().execute(new Runnable() {
             @Override
             public void run() {
+                mDb.questionDao().deleteTestQuestions(testId);
                 for (Question question : questionList) {
                     saveQuestion(question);
                 }
@@ -87,13 +89,10 @@ public class QuestionRepository {
         });
     }
 
-    public int getChapterQuestionCount(int subjectCode, int chapterId) {
-        return mDb.questionDao().getChapterQuestionCount(subjectCode, chapterId);
-    }
 
 
-    public List<Question> getQuestions(int subjectCode, int chapterId) {
-        return mDb.questionDao().getQuestions(subjectCode, chapterId);
+    public List<Question> getQuestions(int testId) {
+        return mDb.questionDao().getQuestions(testId);
     }
 
 
@@ -102,27 +101,23 @@ public class QuestionRepository {
     }
 
 
-    public List<Question> getQuestionList(Chapter chapter, ImageView imageView, ProgressBar progressBar, ChapterListAdapter chapterListAdapter) {
+    public List<Question> getQuestionList(int testId, ProgressBar progressBar) {
         //Get Questions data from remote server
         final List<Question>[] questionList = new List[]{new ArrayList<>()};
 
         //Animations.blink(mContext, imageView);
-        if(progressBar!=null && imageView!=null) {
+        if (progressBar != null) {
             UIHelper.showProgressBar(progressBar);
-            imageView.setVisibility(View.INVISIBLE);
         }
-        Call<Question[]> call = mRetrofitApi.getQuestions(Api.API_KEY, chapter.getSubjectCode(), chapter.getId());
+        Call<Question[]> call = mRetrofitApi.getQuestions(Api.API_KEY, testId);
         call.enqueue(new Callback<Question[]>() {
             @Override
             public void onResponse(Call<Question[]> call, Response<Question[]> response) {
                 questionList[0] = Arrays.asList(response.body());
                 Log.i("INFO", "TTT : " + questionList[0].toString());
-                saveQuestions(questionList[0]);
-                chapterListAdapter.updateChapterQuestionCount(chapter, questionList[0].size());
-                chapterListAdapter.notifyDataSetChanged();
-                if(progressBar!=null && imageView!=null) {
+                saveQuestions(testId, questionList[0]);
+                if (progressBar != null) {
                     UIHelper.hideProgressBar(progressBar);
-                    imageView.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -130,13 +125,12 @@ public class QuestionRepository {
             public void onFailure(Call<Question[]> call, Throwable t) {
                 questionList[0] = null;
                 Log.i("INFO", t.getMessage());
-                if(progressBar!=null && imageView!=null) {
+                if (progressBar != null) {
                     UIHelper.hideProgressBar(progressBar);
-                    imageView.setVisibility(View.VISIBLE);
                 }
             }
         });
-       // imageView.clearAnimation();
+        // imageView.clearAnimation();
         return questionList[0];
     }
 

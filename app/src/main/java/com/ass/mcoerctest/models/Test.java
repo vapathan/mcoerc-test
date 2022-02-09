@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 
 @Entity
 public class Test implements Parcelable {
@@ -17,6 +19,10 @@ public class Test implements Parcelable {
     private int totalQuestions;
     private String timeDuration;
     private boolean isActive;
+    private String courseName;
+    private String examName;
+    private String date;
+    private boolean isSubmitted;
 
     public Test() {
     }
@@ -77,6 +83,38 @@ public class Test implements Parcelable {
         isActive = active;
     }
 
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public String getExamName() {
+        return examName;
+    }
+
+    public void setExamName(String examName) {
+        this.examName = examName;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public boolean getIsSubmitted() {
+        return isSubmitted;
+    }
+
+    public void setIsSubmitted(boolean isSubmitted) {
+        this.isSubmitted = isSubmitted;
+    }
+
     protected Test(Parcel in) {
         id = in.readInt();
         title = in.readString();
@@ -85,6 +123,10 @@ public class Test implements Parcelable {
         totalQuestions = in.readInt();
         timeDuration = in.readString();
         isActive = in.readByte() != 0;
+        courseName = in.readString();
+        examName = in.readString();
+        date = in.readString();
+        isSubmitted = in.readByte() != 0;
     }
 
     public static final Creator<Test> CREATOR = new Creator<Test>() {
@@ -113,9 +155,13 @@ public class Test implements Parcelable {
         dest.writeInt(totalQuestions);
         dest.writeString(timeDuration);
         dest.writeByte((byte) (isActive ? 1 : 0));
+        dest.writeString(courseName);
+        dest.writeString(examName);
+        dest.writeString(date);
+        dest.writeByte((byte) (isSubmitted ? 1 : 0));
     }
 
     public int getCurrentStatus() {
-        return  0;
+        return 0;
     }
 }

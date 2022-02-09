@@ -19,8 +19,6 @@
         <activity android:name="com.ass.mcoerctest.ScoreCardActivity"></activity>
         <activity android:name="com.ass.mcoerctest.TestActivity" />
         <activity android:name="com.ass.mcoerctest.TestListActivity" />
-        <activity android:name="com.ass.mcoerctest.TestsDashboardActivity" />
-        <activity android:name="com.ass.mcoerctest.ChaptersActivity" />
         <activity android:name="com.ass.mcoerctest.AnswerActivity" />
         <activity android:name="com.ass.mcoerctest.QuestionsActivity" />
         <activity android:name="com.ass.mcoerctest.SplashActivity">

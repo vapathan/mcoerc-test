@@ -2,79 +2,21 @@
   "formatVersion": 1,
   "database": {
     "version": 4,
-    "identityHash": "b9e66d562414cc660f6f2300d3f8dd7e",
+    "identityHash": "8e77d79aaefbb986b2f6164a5f2a3965",
     "entities": [
       {
-        "tableName": "Subject",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`code` INTEGER NOT NULL, `name` TEXT, PRIMARY KEY(`code`))",
-        "fields": [
-          {
-            "fieldPath": "code",
-            "columnName": "code",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "code"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Chapter",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `srNum` INTEGER NOT NULL, `name` TEXT, `subjectCode` INTEGER NOT NULL, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "srNum",
-            "columnName": "srNum",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "name",
-            "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "subjectCode",
-            "columnName": "subjectCode",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
         "tableName": "Question",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `title` TEXT, `optA` TEXT, `optB` TEXT, `optC` TEXT, `optD` TEXT, `correctOption` TEXT, `explanation` TEXT, `subjectCode` INTEGER NOT NULL, `chapterId` INTEGER NOT NULL, `isVisited` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `testId` INTEGER NOT NULL, `title` TEXT, `optA` TEXT, `optB` TEXT, `optC` TEXT, `optD` TEXT, `correctOption` TEXT, `selectedOption` TEXT, `isAttempted` INTEGER NOT NULL, `explanation` TEXT, `courseCode` INTEGER NOT NULL, `unitId` INTEGER NOT NULL, `isVisited` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "testId",
+            "columnName": "testId",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -115,20 +57,32 @@
             "notNull": false
           },
           {
+            "fieldPath": "selectedOption",
+            "columnName": "selectedOption",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isAttempted",
+            "columnName": "isAttempted",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
             "fieldPath": "explanation",
             "columnName": "explanation",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "subjectCode",
-            "columnName": "subjectCode",
+            "fieldPath": "courseCode",
+            "columnName": "courseCode",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "chapterId",
-            "columnName": "chapterId",
+            "fieldPath": "unitId",
+            "columnName": "unitId",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -212,7 +166,7 @@
       },
       {
         "tableName": "Test",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `title` TEXT, `examId` INTEGER NOT NULL, `courseCode` TEXT, `totalQuestions` INTEGER NOT NULL, `timeDuration` TEXT, `isActive` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `title` TEXT, `examId` INTEGER NOT NULL, `courseCode` TEXT, `totalQuestions` INTEGER NOT NULL, `timeDuration` TEXT, `isActive` INTEGER NOT NULL, `courseName` TEXT, `examName` TEXT, `date` TEXT, `isSubmitted` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -255,6 +209,30 @@
             "columnName": "isActive",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "courseName",
+            "columnName": "courseName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "examName",
+            "columnName": "examName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isSubmitted",
+            "columnName": "isSubmitted",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -262,148 +240,6 @@
             "id"
           ],
           "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "TestQuestion",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `testId` INTEGER NOT NULL, `questionId` INTEGER NOT NULL, `subjectCode` INTEGER NOT NULL, `isAttempted` INTEGER NOT NULL, `selectedOption` TEXT, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "testId",
-            "columnName": "testId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "questionId",
-            "columnName": "questionId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "subjectCode",
-            "columnName": "subjectCode",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isAttempted",
-            "columnName": "isAttempted",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "selectedOption",
-            "columnName": "selectedOption",
-            "affinity": "TEXT",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "ScoreCard",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `testId` INTEGER NOT NULL, `studentId` INTEGER NOT NULL, `testTitle` TEXT, `phyQuestions` INTEGER NOT NULL, `phyAttempted` INTEGER NOT NULL, `phyCorrect` INTEGER NOT NULL, `chemQuestions` INTEGER NOT NULL, `chemAttempted` INTEGER NOT NULL, `chemCorrect` INTEGER NOT NULL, `mathQuestions` INTEGER NOT NULL, `mathAttempted` INTEGER NOT NULL, `mathCorrect` INTEGER NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "testId",
-            "columnName": "testId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "studentId",
-            "columnName": "studentId",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "testTitle",
-            "columnName": "testTitle",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "phyQuestions",
-            "columnName": "phyQuestions",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "phyAttempted",
-            "columnName": "phyAttempted",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "phyCorrect",
-            "columnName": "phyCorrect",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "chemQuestions",
-            "columnName": "chemQuestions",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "chemAttempted",
-            "columnName": "chemAttempted",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "chemCorrect",
-            "columnName": "chemCorrect",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "mathQuestions",
-            "columnName": "mathQuestions",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "mathAttempted",
-            "columnName": "mathAttempted",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "mathCorrect",
-            "columnName": "mathCorrect",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -412,7 +248,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b9e66d562414cc660f6f2300d3f8dd7e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8e77d79aaefbb986b2f6164a5f2a3965')"
     ]
   }
 }

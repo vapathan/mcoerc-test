@@ -174,7 +174,7 @@ public class ScoreCard implements Parcelable {
         this.phyQuestions = questionsAttempted;
     }
 
-    public void prepareScoreCard(Test test, List<TestQuestion> testQuestionList) {
+    /*public void prepareScoreCard(Test test, List<TestQuestion> testQuestionList) {
         testId = test.getId();
         testTitle = test.getTitle();
         phyQuestions = 0;
@@ -207,7 +207,7 @@ public class ScoreCard implements Parcelable {
                 }
             }
         }
-    }
+    }*/
 
     @Override
     public int describeContents() {

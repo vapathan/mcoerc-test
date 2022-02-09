@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: io.github.sidvenu.mathjaxview:mathjaxview:1.0.7@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/1fffddf908aaa43b080cd4b5005f17bb/transformed/jetified-mathjaxview-1.0.7/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1fffddf908aaa43b080cd4b5005f17bb/transformed/jetified-mathjaxview-1.0.7/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1fffddf908aaa43b080cd4b5005f17bb/transformed/jetified-mathjaxview-1.0.7/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/93b7b68f86285c74629cf3ce84b9a6c7/transformed/jetified-mathjaxview-1.0.7/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/93b7b68f86285c74629cf3ce84b9a6c7/transformed/jetified-mathjaxview-1.0.7/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/93b7b68f86285c74629cf3ce84b9a6c7/transformed/jetified-mathjaxview-1.0.7/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.sidvenu.mathjaxview/mathjaxview/1.0.7/53a60965a5356b277602e48b704d0a36a8940a34/mathjaxview-1.0.7-javadoc.jar!/" />

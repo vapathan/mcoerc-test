@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.ass.mcoerctest.models.Question;
-import com.ass.mcoerctest.models.TestQuestion;
 
 import io.github.sidvenu.mathjaxview.MathJaxView;
 
@@ -42,7 +41,6 @@ public class TestQuestionFragment extends Fragment implements View.OnClickListen
     private int mQuestionId;
     private int mQuestionNum;
     private Question mQuestion;
-    private TestQuestion mTestQuestion;
     private LinearLayout[] optionLayouts;
 
     private QuestionResponseHandler mQuestionResponseHandler;
@@ -53,12 +51,11 @@ public class TestQuestionFragment extends Fragment implements View.OnClickListen
 
 
     // TODO: Rename and change types and number of parameters
-    public static TestQuestionFragment getInstance(int questionNumber, Question question, TestQuestion testQuestion) {
+    public static TestQuestionFragment getInstance(int questionNumber, Question question) {
         TestQuestionFragment questionFragment = new TestQuestionFragment();
         Bundle args = new Bundle();
         args.putInt(QUESTION_NUMBER, questionNumber);
         args.putParcelable(QUESTION, question);
-        args.putParcelable(TEST_QUESTION, testQuestion);
         questionFragment.setArguments(args);
         return questionFragment;
     }
@@ -70,7 +67,6 @@ public class TestQuestionFragment extends Fragment implements View.OnClickListen
         if (getArguments() != null) {
             mQuestionNum = getArguments().getInt(QUESTION_NUMBER);
             mQuestion = getArguments().getParcelable(QUESTION);
-            mTestQuestion = getArguments().getParcelable(TEST_QUESTION);
         }
     }
 
@@ -81,8 +77,8 @@ public class TestQuestionFragment extends Fragment implements View.OnClickListen
         View view = inflater.inflate(R.layout.fragment_question, container, false);
         initGui(view);
 
-        if (mQuestion != null && mTestQuestion != null) {
-            displayQuestion(mQuestion, mTestQuestion);
+        if (mQuestion != null && mQuestion != null) {
+            displayQuestion(mQuestion);
         }
 
         return view;
@@ -140,25 +136,25 @@ public class TestQuestionFragment extends Fragment implements View.OnClickListen
         switch (view.getId()) {
             case R.id.llayout_A:
                 selectOption(R.id.llayout_A);
-                mTestQuestion.setAttempted(true);
-                mTestQuestion.setSelectedOption("A");
+                mQuestion.setAttempted(true);
+                mQuestion.setSelectedOption("A");
                 mQuestionResponseHandler.updateQuestionResponse(mQuestionNum, mQuestion, "A");
                 break;
             case R.id.llayout_B:
                 selectOption(R.id.llayout_B);
-                mTestQuestion.setAttempted(true);
-                mTestQuestion.setSelectedOption("B");
+                mQuestion.setAttempted(true);
+                mQuestion.setSelectedOption("B");
                 mQuestionResponseHandler.updateQuestionResponse(mQuestionNum, mQuestion, "B");
                 break;
             case R.id.llayout_C:
                 selectOption(R.id.llayout_C);
-                mTestQuestion.setAttempted(true);
-                mTestQuestion.setSelectedOption("c");
+                mQuestion.setAttempted(true);
+                mQuestion.setSelectedOption("c");
                 mQuestionResponseHandler.updateQuestionResponse(mQuestionNum, mQuestion, "C");
                 break;
             case R.id.llayout_D:
-                mTestQuestion.setAttempted(true);
-                mTestQuestion.setSelectedOption("D");
+                mQuestion.setAttempted(true);
+                mQuestion.setSelectedOption("D");
                 selectOption(R.id.llayout_D);
                 mQuestionResponseHandler.updateQuestionResponse(mQuestionNum, mQuestion, "D");
                 break;
@@ -166,7 +162,7 @@ public class TestQuestionFragment extends Fragment implements View.OnClickListen
 
     }
 
-    private void displayQuestion(Question question, TestQuestion mTestQuestion) {
+    private void displayQuestion(Question question) {
         //display question
         tvQuestionNo.setText(mQuestionNum + 1 + ".");
         tvQuestion.setText(question.getTitle(true));
@@ -175,8 +171,8 @@ public class TestQuestionFragment extends Fragment implements View.OnClickListen
         tvOptionC.setText(question.getOptC(true));
         tvOptionD.setText(question.getOptD(true));
 
-        if (mTestQuestion.isAttempted()) {
-            switch (mTestQuestion.getSelectedOption()) {
+        if (mQuestion.isAttempted()) {
+            switch (mQuestion.getSelectedOption()) {
                 case "A":
                     selectOption(R.id.llayout_A);
                     break;

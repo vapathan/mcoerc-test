@@ -129,7 +129,7 @@ public class ChapterListAdapter extends RecyclerView.Adapter<ChapterListAdapter.
     }
 
     public void downloadQuestions(Chapter chapter, ImageView imageView, ProgressBar progressBar) {
-        mQuestionRepository.getQuestionList(chapter, imageView, progressBar, this);
+       // mQuestionRepository.getQuestionList(chapter, imageView, progressBar, this);
     }
 
 

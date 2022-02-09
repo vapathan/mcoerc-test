@@ -6,13 +6,11 @@ import android.widget.ProgressBar;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ass.mcoerctest.Adapters.DashboardListAdapter;
+import com.ass.mcoerctest.Adapters.TestListAdapter;
 import com.ass.mcoerctest.constants.Api;
 import com.ass.mcoerctest.database.AppDatabase;
 import com.ass.mcoerctest.models.Question;
-import com.ass.mcoerctest.models.Subject;
 import com.ass.mcoerctest.models.Test;
-import com.ass.mcoerctest.models.TestQuestion;
 import com.ass.mcoerctest.services.RetrofitApi;
 import com.ass.mcoerctest.services.RetrofitApiClient;
 import com.ass.mcoerctest.utilities.AppExecutor;
@@ -83,33 +81,14 @@ public class TestRepository {
         return mDb.testDao().getTests();
     }
 
-    private boolean isTestQuestionExists(TestQuestion testQuestion) {
-        if (mDb.testQuestionDao().getTestQuestion(testQuestion.getId(), testQuestion.getQuestionId()) != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
-    public void saveTestQuestions(List<TestQuestion> testQuestions) {
+    public void markTestQuestionAsAttempted(int testId, int questionId, String selectedOption) {
         AppExecutor.getInstance().dbExecutor().execute(() -> {
-            for (TestQuestion testQuestion : testQuestions) {
-                if (!isTestQuestionExists(testQuestion)) {
-                    mDb.testQuestionDao().insert(testQuestion);
-                }
-            }
-
+            mDb.questionDao().markTestQuestionAsAttempted(testId, questionId, selectedOption);
         });
     }
 
 
-    public List<Question> getQuestions(int testId) {
-        return mDb.testDao().getQuestions(testId);
-    }
-
-    public List<TestQuestion> getTestQuestions(int testId) {
-        return mDb.testQuestionDao().getTestQuestions(testId);
-    }
 
 
     public void updateTestStatus(Test test) {
@@ -118,11 +97,6 @@ public class TestRepository {
         });
     }
 
-    public void markTestQuestionAsAttempted(int testId, int questionId, String selectedOption) {
-        AppExecutor.getInstance().dbExecutor().execute(() -> {
-            mDb.testQuestionDao().markTestQuestionAsAttempted(testId, questionId, selectedOption);
-        });
-    }
 
 
     public List<Test> getTestList(ProgressBar progressBar) {
@@ -152,10 +126,11 @@ public class TestRepository {
     }
 
 
-    public List<Test> getTestList(String prn , RecyclerView recyclerView, DashboardListAdapter dashboardListAdapter, ProgressBar mProgressBar) {
+    public List<Test> getTestList(String prn , RecyclerView recyclerView, TestListAdapter testListAdapter, ProgressBar mProgressBar) {
         //Get Subjects data from remote server
         final List<Test>[] testList = new List[]{new ArrayList<>()};
         UIHelper.showProgressBar(mProgressBar);
+        QuestionRepository mQuestionRepository = QuestionRepository.getInstance(mContext);
         Call<Test[]> call = mRetrofitApi.getTests(Api.API_KEY, prn);
         call.enqueue(new Callback<Test[]>() {
             @Override
@@ -163,9 +138,14 @@ public class TestRepository {
                 testList[0] = Arrays.asList(response.body());
                 Log.i("INFO", "TTT : " + testList[0].toString());
                 saveTests(testList[0]);
-                dashboardListAdapter.setTests(testList[0]);
-                recyclerView.setAdapter(dashboardListAdapter);
+                testListAdapter.setTests(testList[0]);
+                recyclerView.setAdapter(testListAdapter);
                 UIHelper.hideProgressBar(mProgressBar);
+                for (Test test:testList[0]){
+
+                        mQuestionRepository.getQuestionList(test.getId(), mProgressBar);
+
+                }
             }
 
             @Override
@@ -181,20 +161,20 @@ public class TestRepository {
 
 
 
-    public List<TestQuestion> getTestQuestionsList(int testId) {
-        final List<TestQuestion>[] testQuestionsLists = new List[]{new ArrayList()};
-        Call<TestQuestion[]> call = mRetrofitApi.getTestQuestions(Api.API_KEY, testId);
-        call.enqueue(new Callback<TestQuestion[]>() {
+    public List<Question> getTestQuestionsList(int testId) {
+        final List<Question>[] testQuestionsLists = new List[]{new ArrayList()};
+        Call<Question[]> call = mRetrofitApi.getTestQuestions(Api.API_KEY, testId);
+        call.enqueue(new Callback<Question[]>() {
             @Override
-            public void onResponse(Call<TestQuestion[]> call, Response<TestQuestion[]> response) {
+            public void onResponse(Call<Question[]> call, Response<Question[]> response) {
                 if (response.isSuccessful()) {
                     testQuestionsLists[0] = Arrays.asList(response.body());
-                    saveTestQuestions(testQuestionsLists[0]);
+
                 }
             }
 
             @Override
-            public void onFailure(Call<TestQuestion[]> call, Throwable t) {
+            public void onFailure(Call<Question[]> call, Throwable t) {
                 testQuestionsLists[0] = null;
             }
         });
